@@ -1,0 +1,32 @@
+{
+  "name": "root",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "app"
+  ],
+  "devDependencies": {
+    "@types/node": "^25.6.0",
+    "lerna": "^9.0.7",
+    "typescript": "^6.0.3"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/stencil-library/stencil-library.esm.js",
+      "require": "./dist/stencil-library/stencil-library.cjs.js"
+    },
+    "./dist/*": {
+      "import": "./dist/*",
+      "types": "./dist/*"
+    },
+    "./components/*": {
+      "import": "./dist/components/*.js",
+      "types": "./dist/components/*.d.ts"
+    },
+    "./loader": {
+      "import": "./loader/index.js",
+      "require": "./loader/index.cjs",
+      "types": "./loader/index.d.ts"
+    }
+  }
+}
