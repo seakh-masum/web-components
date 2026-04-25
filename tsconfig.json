@@ -13,7 +13,6 @@
             "es6"
         ],
         "baseUrl": ".",
-        "ignoreDeprecations": "6.0",
         "paths": {
             "stencil-library": [
                 "packages/stencil-library/dist"
