@@ -1,5 +1,5 @@
 
-import { Component, Prop, h } from '@stencil/core';
+import { Component, Prop, h, Event, EventEmitter } from '@stencil/core';
 
 @Component({
   tag: 'sk-button',
@@ -16,9 +16,24 @@ export class SkButton {
   /** Disabled state */
   @Prop() disabled: boolean = false;
 
+
+  /** Emits when the button is clicked */
+  @Event() skClick!: EventEmitter<MouseEvent>;
+
+  private handleClick = (event: MouseEvent) => {
+    if (!this.disabled) {
+      this.skClick.emit(event);
+    }
+  };
+
   render() {
     return (
-      <button type={this.type} disabled={this.disabled} class="sk-button">
+      <button
+        type={this.type}
+        disabled={this.disabled}
+        class="sk-button"
+        onClick={this.handleClick}
+      >
         {this.label}
       </button>
     );

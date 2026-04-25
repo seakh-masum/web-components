@@ -21,8 +21,11 @@ export const config: Config = {
       serviceWorker: null, // disable service workers
     },
     reactOutputTarget({
-      // Relative path to where the React components will be generated
       outDir: '../react-library/lib/components/stencil-generated/',
+      componentCorePackage: 'stencil-library',
+      proxiesFile: '../react-library/lib/components/stencil-generated/components.ts',
+      includeDefineCustomElements: true,
+      includeImportCustomElements: true,
     }),
   ],
 };

@@ -8,7 +8,17 @@
   "devDependencies": {
     "@types/node": "^25.6.0",
     "lerna": "^9.0.7",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "concurrently": "^8.2.2",
+    "chokidar-cli": "^3.0.0"
+  },
+  "scripts": {
+    "dev:stencil": "npm run start --workspace=packages/stencil-library",
+    "dev:react": "npm run build --workspace=packages/react-library -- --watch",
+    "dev:app": "npm run dev --workspace=app",
+    "watch:stencil-to-react": "chokidar \"packages/stencil-library/dist/**/*\" -c \"npm run build --workspace=packages/react-library\"",
+    "watch:react-to-app": "chokidar \"packages/react-library/dist/**/*\" -c \"npm run build --workspace=app\"",
+    "dev:all": "concurrently -k -n stencil,react,app,watch-sr,watch-ra -c blue,green,magenta,yellow,cyan \"npm run dev:stencil\" \"npm run dev:react\" \"npm run dev:app\" \"npm run watch:stencil-to-react\" \"npm run watch:react-to-app\""
   },
   "exports": {
     ".": {

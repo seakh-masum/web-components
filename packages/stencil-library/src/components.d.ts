@@ -38,6 +38,10 @@ export namespace Components {
         "type": 'button' | 'submit' | 'reset';
     }
 }
+export interface SkButtonCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSkButtonElement;
+}
 declare global {
     interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
     }
@@ -45,7 +49,18 @@ declare global {
         prototype: HTMLMyComponentElement;
         new (): HTMLMyComponentElement;
     };
+    interface HTMLSkButtonElementEventMap {
+        "skClick": MouseEvent;
+    }
     interface HTMLSkButtonElement extends Components.SkButton, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSkButtonElementEventMap>(type: K, listener: (this: HTMLSkButtonElement, ev: SkButtonCustomEvent<HTMLSkButtonElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSkButtonElementEventMap>(type: K, listener: (this: HTMLSkButtonElement, ev: SkButtonCustomEvent<HTMLSkButtonElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLSkButtonElement: {
         prototype: HTMLSkButtonElement;
@@ -82,6 +97,10 @@ declare namespace LocalJSX {
           * @default 'Button'
          */
         "label"?: string;
+        /**
+          * Emits when the button is clicked
+         */
+        "onSkClick"?: (event: SkButtonCustomEvent<MouseEvent>) => void;
         /**
           * Button type
           * @default 'button'

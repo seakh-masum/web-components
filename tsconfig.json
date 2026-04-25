@@ -11,7 +11,17 @@
         "sourceMap": true,
         "lib": [
             "es6"
-        ]
+        ],
+        "baseUrl": ".",
+        "ignoreDeprecations": "6.0",
+        "paths": {
+            "stencil-library": [
+                "packages/stencil-library/dist"
+            ],
+            "stencil-library/*": [
+                "packages/stencil-library/dist/*"
+            ]
+        }
     },
     "exclude": [
         "node_modules",

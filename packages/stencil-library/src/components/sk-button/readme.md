@@ -14,6 +14,13 @@
 | `type`     | `type`     | Button type    | `"button" \| "reset" \| "submit"` | `'button'` |
 
 
+## Events
+
+| Event     | Description                      | Type                      |
+| --------- | -------------------------------- | ------------------------- |
+| `skClick` | Emits when the button is clicked | `CustomEvent<MouseEvent>` |
+
+
 ----------------------------------------------
 
 *Built with [StencilJS](https://stenciljs.com/)*

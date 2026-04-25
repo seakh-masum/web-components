@@ -7,13 +7,14 @@
 
 /* eslint-disable */
 
-import type { StencilReactComponent } from '@stencil/react-output-target/runtime';
+import type { EventName, StencilReactComponent } from '@stencil/react-output-target/runtime';
 import { createComponent } from '@stencil/react-output-target/runtime';
 import React from 'react';
 
+import { type SkButtonCustomEvent } from "stencil-library";
 import type { JSX } from "stencil-library/dist/components";
-import { MyComponent as MyComponentElement, defineCustomElement as defineMyComponent } from "stencil-library/my-component";
-import { SkButton as SkButtonElement, defineCustomElement as defineSkButton } from "stencil-library/sk-button";
+import { MyComponent as MyComponentElement, defineCustomElement as defineMyComponent } from "stencil-library";
+import { SkButton as SkButtonElement, defineCustomElement as defineSkButton } from "stencil-library";
 
 export type MyComponentEvents = NonNullable<unknown>;
 
@@ -26,13 +27,13 @@ export const MyComponent: StencilReactComponent<MyComponentElement, MyComponentE
     defineCustomElement: defineMyComponent
 });
 
-export type SkButtonEvents = NonNullable<unknown>;
+export type SkButtonEvents = { onSkClick: EventName<SkButtonCustomEvent<MouseEvent>> };
 
 export const SkButton: StencilReactComponent<SkButtonElement, SkButtonEvents, JSX.SkButton> = /*@__PURE__*/ createComponent<SkButtonElement, SkButtonEvents, JSX.SkButton>({
     tagName: 'sk-button',
     elementClass: SkButtonElement,
     // @ts-ignore - ignore potential React type mismatches between the Stencil Output Target and your project.
     react: React,
-    events: {} as SkButtonEvents,
+    events: { onSkClick: 'skClick' } as SkButtonEvents,
     defineCustomElement: defineSkButton
 });
